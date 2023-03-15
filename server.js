@@ -10,7 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Routes
-app.post('/users', userController.create);
+app.post('/users', userController.createUser);
+app.post('/delusers', userController.deleteUser);
 app.get("/", (req, res) => {
     res.json({ message: "Bienvenue." });
 });
