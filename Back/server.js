@@ -9,11 +9,11 @@ app.use(cors({ origin: "http://localhost:8081" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//Routes
+//Routes & Angular
 app.post('/users', userController.createUser);
 app.post('/delusers', userController.deleteUser);
-app.get("/", (req, res) => {
-    res.json({ message: "Bienvenue." });
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 // Connexion à la base de données
@@ -37,7 +37,7 @@ app.listen(PORT, () => {
 // Appel à une API externe avec axios
 axios.post('http://localhost:8081/users')
     .then(response => {
-        console.log("hello");
+        console.log("Réussie.");
     })
     .catch(error => {
         console.error(error);
