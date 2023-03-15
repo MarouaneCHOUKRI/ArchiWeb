@@ -4,28 +4,29 @@ const Utilisateur = db.ArchiWeb.Utilisateur;
 
 //ajouter un utilisateur
 exports.createUser = (req, res) => {
-    const password_hash = bcrypt.hashSync('csdcdscdcdfvdf', 10);
     const utilisateur = new Utilisateur({
-        nom: "jhg",
-        prenom: "hu",
-        email: "jkhj",
-        motDePasse: password_hash,
-        role: "administrateur",
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        email: req.body.email,
+        motDePasse: bcrypt.hashSync(req.body.motdepasse, 10),
+        role: req.body.role,
     });
 
     utilisateur
         .save()
         .then(data => {
-            res.send(data);
+            res.sendFile(path.join(__dirname, '../../../Front/src/index.html'));
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Tutorial."
+                message: err.message
             });
         });
 };
+
 // Supprimer un utilisateur
 exports.deleteUser = (req, res) => {
+
     const id = "6412062ff9462578eef1bc7c";
 
     Utilisateur.findByIdAndRemove(id)
