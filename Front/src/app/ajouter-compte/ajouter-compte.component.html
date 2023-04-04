@@ -67,7 +67,7 @@
     <body>
 <h2>Ajouter un Compte (Enseignant / Etudiant)</h2>
 
-      <form action="/users" method="POST" [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+      <form action="/Create" method="POST" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
           <label for="nom">Nom</label>
           <input type="text" id="nom" name="nom" required><br><br>
@@ -79,10 +79,10 @@
           <input type="email" id="email" name="email" required><br><br>
 
           <label for="motdepasse">Mot de passe</label>
-          <input type="password" id="motdepasse" name="motdepasse" formControlName="motdepasse" required><br><br>
+          <input type="password" id="motdepasse" name="motdepasse" min="8" required><br><br>
 
           <label for="confirmermotdepasse">Confirmer le mot de passe</label>
-          <input type="password" id="confirmermotdepasse" name="confirmermotdepasse" formControlName="confirmermotdepasse" required><br><br>
+          <input type="password" id="confirmermotdepasse" name="confirmermotdepasse" min="8" required><br><br>
 
           <label for="role">Rôle</label>
           <select id="role" name="role">
@@ -91,7 +91,6 @@
           </select><br><br>
 
           <input type="submit" value="Soumettre">
-
       </form>
     </body>
 </html>

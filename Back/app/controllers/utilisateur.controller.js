@@ -2,7 +2,7 @@ const db = require("../models");
 const bcrypt = require('bcrypt');
 const Utilisateur = db.ArchiWeb.Utilisateur;
 
-//ajouter un utilisateur
+//Ajouter un utilisateur
 exports.createUser = (req, res) => {
     const utilisateur = new Utilisateur({
         nom: req.body.nom,
@@ -27,13 +27,11 @@ exports.createUser = (req, res) => {
 //Supprimer un utilisateur
 exports.deleteUser = (req, res) => {
 
-    const id = "6412062ff9462578eef1bc7c";
-
-    Utilisateur.findByIdAndRemove(id)
+    Utilisateur.findOneAndRemove({ email: req.body.email })
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Impossible de supprimer l'utilisateur avec l'id=${id}. L'utilisateur n'a pas été trouvé.`
+                    message: `Impossible de supprimer l'utilisateur avec l'email ${req.body.email}. L'utilisateur n'a pas été trouvé.`
                 });
             } else {
                 res.send({
@@ -43,7 +41,7 @@ exports.deleteUser = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Impossible de supprimer l'utilisateur avec l'id=" + id
+                message: "Impossible de supprimer l'utilisateur avec l'email " + req.body.email
             });
         });
 };
@@ -53,15 +51,19 @@ exports.connectUser = (req, res) => {
 
     const collection = Utilisateur;
 
-    collection.findOne({ $and: [{ email: req.body.email }, { role: { $in: ["étudiant", "enseignant"] } }] })
+    collection.findOne({ $and: [{ email: req.body.email }] })
         .then(user => {
-
             if (!user || !bcrypt.compareSync(req.body.password, user.motDePasse)) {
-                res.status(401).json({ message: 'Erreur lors de l\'authentification' });
+                res.redirect('/Login');
                 return;
             }
 
-            res.status(401).json({ message: 'Auth Réussi' });
+            req.session.userId = user._id;
+            req.session.role = user.role;
+            req.session.username = user.prenom + " " + user.nom;
+            req.session.isauthenticated = true;
+
+            res.redirect('/accueil');
             return;
         })
 }
