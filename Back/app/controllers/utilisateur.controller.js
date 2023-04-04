@@ -15,7 +15,7 @@ exports.createUser = (req, res) => {
     utilisateur
         .save()
         .then(data => {
-            res.sendFile(path.join(__dirname, '../../../Front/src/index.html'));
+            res.redirect('/Login');
         })
         .catch(err => {
             res.status(500).send({
@@ -24,7 +24,7 @@ exports.createUser = (req, res) => {
         });
 };
 
-// Supprimer un utilisateur
+//Supprimer un utilisateur
 exports.deleteUser = (req, res) => {
 
     const id = "6412062ff9462578eef1bc7c";
@@ -47,3 +47,21 @@ exports.deleteUser = (req, res) => {
             });
         });
 };
+
+// Connecter un utilisateur
+exports.connectUser = (req, res) => {
+
+    const collection = Utilisateur;
+
+    collection.findOne({ $and: [{ email: req.body.email }, { role: { $in: ["étudiant", "enseignant"] } }] })
+        .then(user => {
+
+            if (!user || !bcrypt.compareSync(req.body.password, user.motDePasse)) {
+                res.status(401).json({ message: 'Erreur lors de l\'authentification' });
+                return;
+            }
+
+            res.status(401).json({ message: 'Auth Réussi' });
+            return;
+        })
+}
