@@ -14,27 +14,44 @@ export class ModifierInfoAdminComponent {
   nom: string | null;
   prenom: string | null;
   email: string | null;
-  motdepasse = null;
+  motdepasse: string | null;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.nom = localStorage.getItem('nom');
     this.prenom = localStorage.getItem('prenom');
     this.email = localStorage.getItem('email');
+    this.motdepasse = '';
   }
 
   ngOnInit(): void {
     this.formulaire = this.fb.group({
-      nom: [localStorage.getItem('nom'), [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      prenom: [localStorage.getItem('prenom'), [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      email: [localStorage.getItem('email'), [Validators.required, Validators.email]],
-      motdepasse: ['', [Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])')]]
+      nom: [this.nom , [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      prenom: [this.prenom, [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      email: [this.email, [Validators.required, Validators.email]],
+      motdepasse: [this.motdepasse, [Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])')]]
     });    
   }
 
   Mofifie(): void {
     
-    if (this.formulaire.invalid) {
-      alert("Veuillez remplir tous les champs correctement");
+    if (this.formulaire.controls['nom'].invalid) {
+      alert("Le champ nom est obligatoire et doit contenir uniquement des lettres de l'alphabet.");
+      return;
+    }
+
+    if (this.formulaire.controls['prenom'].invalid) {
+      alert("Le champ prenom est obligatoire et doit contenir uniquement des lettres de l'alphabet.");
+      return;
+    }
+
+    if (this.formulaire.controls['email'].invalid) {
+      alert("Le champ email est obligatoire et doit contenir une adresse email valide.");
+      return;
+    }
+    
+    console.log(this.formulaire.controls['motdepasse'].value)
+    if (this.formulaire.controls['motdepasse'].invalid) {
+      alert("Le mot de passe doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
       return;
     }
     

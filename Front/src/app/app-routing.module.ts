@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'accueil', component: AccueilAdminComponent, canActivate: [MyGuardGuard] },
   { path: 'supprimer', component: SupprimerCompteComponent, canActivate: [MyGuardGuard]},
   { path: 'ajouter', component: AjouterCompteComponent, canActivate: [MyGuardGuard]},
-  { path: 'modifier-admin', component: ModifierInfoAdminComponent},
+  { path: 'modifier-admin', component: ModifierInfoAdminComponent, canActivate: [MyGuardGuard]},
   { path: 'modifier-users', component: ModifierInfoUsersComponent, canActivate: [MyGuardGuard]},
   { path: '**', component: LoginComponent}
 ];
