@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccueilUtilisateurComponent } from './accueil-utilisateur.component';
+import { AccueilUtilisateurComponent } from './nav-bar.component';
 
 describe('AccueilUtilisateurComponent', () => {
   let component: AccueilUtilisateurComponent;

@@ -17,14 +17,14 @@ export class SupprimerCompteComponent {
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.formulaire = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
-    
     this.route.queryParams.subscribe(params => {
       if(params['email']){
         this.email = params['email'];
       }
+    });
+
+    this.formulaire = this.fb.group({
+      email: [this.email, [Validators.required, Validators.email]],
     });
   }
 

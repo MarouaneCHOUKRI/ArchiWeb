@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-accueil-utilisateur',
-  templateUrl: './accueil-utilisateur.component.html',
-  styleUrls: ['./accueil-utilisateur.component.css']
+  selector: 'app-accueil-admin',
+  templateUrl: './accueil-admin.component.html',
+  styleUrls: ['./accueil-admin.component.css']
 })
-export class AccueilUtilisateurComponent {
-
+export class AccueilAdminComponent {
   nom: string | null;
   prenom: string | null;
 
@@ -21,7 +20,4 @@ export class AccueilUtilisateurComponent {
     localStorage.removeItem('prenom');
     this.router.navigate(['/login']);
   }
-
 }
-
-

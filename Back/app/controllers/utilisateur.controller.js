@@ -61,17 +61,16 @@ exports.connectUser = (req, res) => {
         })
 }
 
-//Obtenir tous les utilisateurs - enseignat | étudiant 
+//Obtenir tous les utilisateurs - enseignant | étudiant 
 exports.getAllUsers = (req, res) => {
-    Utilisateur.find({ role: { $in: [ 'étudiant', 'enseignant' ] } })
-      .then(users => {
-        res.send(users);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Une erreur s'est produite lors de la récupération des utilisateurs."
+    Utilisateur.find({ role: { $in: ['étudiant', 'enseignant'] } })
+        .then(users => {
+            res.send(users);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Une erreur s'est produite lors de la récupération des utilisateurs."
+            });
         });
-      });
-  };
-  
+};
