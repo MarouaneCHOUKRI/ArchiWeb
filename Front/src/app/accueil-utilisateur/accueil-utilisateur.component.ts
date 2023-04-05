@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accueil-utilisateur',
@@ -9,14 +8,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AccueilUtilisateurComponent {
 
-  user: any;
-  
-  constructor(private http: HttpClient) {}
+  nom: string | null;
+  prenom: string | null;
 
-  ngOnInit() {
-    this.http.get<any>('http://localhost:8081/Accueil').subscribe((data: any) => {
-      this.user = data.user;
-    });
+  constructor(private router: Router) {
+    this.nom = localStorage.getItem('nom');
+    this.prenom = localStorage.getItem('prenom');
+  }
+
+  logout(): void {
+    localStorage.removeItem('nom');
+    localStorage.removeItem('prenom');
+    this.router.navigate(['/login']);
   }
 
 }

@@ -67,25 +67,25 @@
     <body>
 <h2>Ajouter un Compte (Enseignant / Etudiant)</h2>
 
-      <form action="/Create" method="POST" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="Add()" [formGroup]="formulaire">
 
           <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" required><br><br>
+          <input type="text" id="nom" name="nom" formControlName="nom"><br><br>
 
           <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" required><br><br>
+          <input type="text" id="prenom" name="prenom" formControlName="prenom"><br><br>
 
           <label for="email">Adresse email</label>
-          <input type="email" id="email" name="email" required><br><br>
+          <input type="email" id="email" name="email" formControlName="email"><br><br>
 
           <label for="motdepasse">Mot de passe</label>
-          <input type="password" id="motdepasse" name="motdepasse" min="8" required><br><br>
+          <input type="password" id="motdepasse" name="motdepasse" formControlName="motdepasse"><br><br>
 
           <label for="confirmermotdepasse">Confirmer le mot de passe</label>
-          <input type="password" id="confirmermotdepasse" name="confirmermotdepasse" min="8" required><br><br>
+          <input type="password" id="confirmermotdepasse" name="confirmermotdepasse" formControlName="confirmermotdepasse"><br><br>
 
           <label for="role">Rôle</label>
-          <select id="role" name="role">
+          <select id="role" name="role" formControlName="role">
             <option value="enseignant">Enseignant</option>
             <option value="étudiant">Étudiant</option>
           </select><br><br>

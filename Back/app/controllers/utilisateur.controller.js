@@ -15,12 +15,10 @@ exports.createUser = (req, res) => {
     utilisateur
         .save()
         .then(data => {
-            res.redirect('/Login');
+            res.send({ status: 'success' });
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message
-            });
+            res.send({ status: 'error' });
         });
 };
 
@@ -54,16 +52,26 @@ exports.connectUser = (req, res) => {
     collection.findOne({ $and: [{ email: req.body.email }] })
         .then(user => {
             if (!user || !bcrypt.compareSync(req.body.password, user.motDePasse)) {
-                res.redirect('/Login');
+                res.send({ status: 'error', message: 'Identifiants incorrects' });
                 return;
             }
 
-            req.session.userId = user._id;
-            req.session.role = user.role;
-            req.session.username = user.prenom + " " + user.nom;
-            req.session.isauthenticated = true;
-
-            res.redirect('/accueil');
+            res.send({ status: 'success', message: { nom: user.nom, prenom: user.prenom, email: user.email } });
             return;
         })
 }
+
+//Obtenir tous les utilisateurs - enseignat | étudiant 
+exports.getAllUsers = (req, res) => {
+    Utilisateur.find({ role: { $in: [ 'étudiant', 'enseignant' ] } })
+      .then(users => {
+        res.send(users);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Une erreur s'est produite lors de la récupération des utilisateurs."
+        });
+      });
+  };
+  

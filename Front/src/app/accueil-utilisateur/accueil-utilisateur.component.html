@@ -5,6 +5,16 @@
   <title>Accueil</title>
 </head>
 <body>
-  <h1>Bienvenue sur la page d'accueil, {{ user }} !</h1>
+  <p>Bienvenue en tant qu'administrateur - {{nom}} {{prenom}}</p>
+  <a routerLink="/ajouter">Ajouter un utilisateur</a>
+  <br><br>
+  <a routerLink="/supprimer">Supprimer un utilisateur</a>
+  <br><br>
+  <a routerLink="/modifier-admin">Modifier vos informations</a>
+  <br><br>
+  <a routerLink="/modifier-users">Modification des utilisateurs</a>  
+  <br><br> 
+  <a (click)="logout()">Déconnexion</a>
+
 </body>
 </html>

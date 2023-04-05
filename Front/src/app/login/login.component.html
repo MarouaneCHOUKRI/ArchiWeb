@@ -56,18 +56,16 @@
   </head>
   <body>
     <h1>Login</h1>
-    <form action="/Login" method="post">
+    <form (ngSubmit)="login()" #loginForm="ngForm">
       <div>
         <label for="email">Email</label>
-        <input type="text" id="email" name="email" required>
+        <input type="text" id="email" name="email" [(ngModel)]="email">
       </div>
       <div>
         <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" [(ngModel)]="password"> 
       </div>
-      <div>
-        <button type="submit">Se connecter</button>
-      </div>
+      <button type="submit">Se connecter</button>
     </form>
   </body>
 </html>

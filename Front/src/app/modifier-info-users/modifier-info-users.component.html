@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Modification des utilisateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://kit.fontawesome.com/bfa63971e4.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+
+    td.actions {
+      text-align: center;
+    }
+
+    td.actions i {
+      cursor: pointer;
+    }
+
+    td.actions i.edit {
+      color: #2196F3;
+      margin-right: 10px;
+    }
+
+    td.actions i.delete {
+      color: #F44336;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2196F3;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    
+
+  </style>
+</head>
+<body>
+<h2>Modification des utilisateurs</h2>
+
+<table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Rôle</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td class="actions">
+          <a routerLink="/supprimer" [queryParams]="{email: user.email}">Supprimer l'utilisateur</a>
+          <br><br>
+          <a routerLink="/modifier-users">Modifier ses informations</a>
+          <br><br>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
