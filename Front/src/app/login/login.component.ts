@@ -23,11 +23,12 @@ export class LoginComponent {
       return;
     }
   
-    this.http.post<{ status: string; message: { nom: string; prenom: string, email: string}; }>('http://localhost:8081/Login', { email: this.email, password: this.password })
+    this.http.post<{ status: string; message: { _id : string, nom: string; prenom: string, email: string}; }>('http://localhost:8081/Login', { email: this.email, password: this.password })
     .pipe(
       tap(response => {
         if (response.status === 'success') {
-          const { nom, prenom, email } = response.message;
+          const { _id, nom, prenom, email } = response.message;
+          localStorage.setItem('_id', _id);
           localStorage.setItem('nom', nom);
           localStorage.setItem('prenom', prenom);
           localStorage.setItem('email', email);

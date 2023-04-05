@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, '../Front/src/')));
 app.post('/Create', userController.createUser);
 app.post('/Delete', userController.deleteUser);
 app.post('/Login', userController.connectUser);
+app.post('/Modifie', userController.updateUser);
 app.get('/Users', userController.getAllUsers);
 
 // Connexion à la base de données

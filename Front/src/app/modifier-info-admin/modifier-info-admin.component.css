@@ -1,6 +1,0 @@
-label::after {
-    content: "*";
-    color: red;
-    margin-left: 5px;
-}
-  

@@ -11,30 +11,25 @@
   <app-nav-bar></app-nav-bar>
   <div class="container">
     <h2 class="my-4">Modification d'informations</h2>
-    <form>
+    <form (ngSubmit)="Mofifie()" [formGroup]="formulaire">
       <div class="form-group">
         <label for="nom">Nom</label>
-        <input type="text" class="form-control" id="nom" name="nom" value="{{nom}}">
+        <input type="text" class="form-control" id="nom" name="nom" formControlName="nom">
       </div>
 
       <div class="form-group">
         <label for="prenom">Prénom</label>
-        <input type="text" class="form-control" id="prenom" name="prenom" value="{{prenom}}">
+        <input type="text" class="form-control" id="prenom" name="prenom" formControlName="prenom">
       </div>
 
       <div class="form-group">
         <label for="email">Adresse email</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+        <input type="email" class="form-control" id="email" name="email" formControlName="email">
       </div>
 
       <div class="form-group">
         <label for="motdepasse">Mot de passe</label>
-        <input type="password" class="form-control" id="motdepasse" name="motdepasse" value="********">
-      </div>
-
-      <div class="form-group">
-        <label for="confirmermotdepasse">Confirmer le mot de passe</label>
-        <input type="password" class="form-control" id="confirmermotdepasse" name="confirmermotdepasse" value="********">
+        <input type="password" class="form-control" id="motdepasse" name="motdepasse" formControlName="motdepasse" >
       </div>
 
       <button type="submit" class="btn btn-primary mt-3 mr-2">Enregistrer</button>

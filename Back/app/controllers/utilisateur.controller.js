@@ -56,7 +56,7 @@ exports.connectUser = (req, res) => {
                 return;
             }
 
-            res.send({ status: 'success', message: { nom: user.nom, prenom: user.prenom, email: user.email } });
+            res.send({ status: 'success', message: { _id: user._id, nom: user.nom, prenom: user.prenom, email: user.email } });
             return;
         })
 }
@@ -71,6 +71,43 @@ exports.getAllUsers = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Une erreur s'est produite lors de la récupération des utilisateurs."
+            });
+        });
+};
+
+// Modifier les informations d'un utilisateur
+exports.updateUser = (req, res) => {
+    const userId = req.body._id;
+
+    Utilisateur.findById(userId)
+        .then(user => {
+            if (!user) {
+                res.status(404).send({
+                    message: `Impossible de modifier l'utilisateur avec l'ID ${userId}. L'utilisateur n'a pas été trouvé.`
+                });
+                return;
+            }
+
+            user.nom = req.body.nom;
+            user.prenom = req.body.prenom;
+            user.email = req.body.email;
+            if (req.body.motdepasse) {
+                user.motDePasse = bcrypt.hashSync(req.body.motdepasse, 10);
+            }
+
+            user.save()
+                .then(data => {
+                    res.send({ status: 'success' });
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: "Une erreur s'est produite lors de la modification de l'utilisateur avec l'ID " + userId
+                    });
+                });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Une erreur s'est produite lors de la récupération de l'utilisateur avec l'ID " + userId
             });
         });
 };
