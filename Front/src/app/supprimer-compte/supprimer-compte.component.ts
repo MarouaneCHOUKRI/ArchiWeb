@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-supprimer-compte',
@@ -38,12 +39,17 @@ export class SupprimerCompteComponent {
 
     const data = this.formulaire.value;
 
-    this.http.post("http://localhost:8081/Delete", data)
-      .subscribe(response => {
-        alert('Response:' + response);
-        this.router.navigate(['/modifier-users']);
-      }, error => {
-        alert('Error:' + error);
-      });
+    this.http.post<{ status: string; message: string; }>("http://localhost:8081/Delete", data)
+    .pipe(
+        tap(response => {
+            alert(response.message);
+            this.router.navigate(['/modifier-users']);
+        }),
+        catchError(error => {
+            alert(error.error.message);
+            throw error;
+        })
+    ).subscribe();
+    
   }
 }

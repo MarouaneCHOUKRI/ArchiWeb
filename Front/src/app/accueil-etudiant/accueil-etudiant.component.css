@@ -1,0 +1,15 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-left:  100px;
+    margin-right: 100px;
+}
+p{
+    font-size:  18px;
+    text-align: justify;
+}
+body{
+    overflow: hidden;
+}

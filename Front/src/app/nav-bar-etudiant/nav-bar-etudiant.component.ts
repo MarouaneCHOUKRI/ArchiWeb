@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  selector: 'app-nav-bar-etudiant',
+  templateUrl: './nav-bar-etudiant.component.html',
+  styleUrls: ['./nav-bar-etudiant.component.css']
 })
-export class AccueilUtilisateurComponent {
-
+export class NavBarEtudiantComponent {
   constructor(private router: Router) {}
 
   logout(): void {
@@ -18,7 +17,4 @@ export class AccueilUtilisateurComponent {
     localStorage.removeItem('role');
     this.router.navigate(['/login']);
   }
-
 }
-
-

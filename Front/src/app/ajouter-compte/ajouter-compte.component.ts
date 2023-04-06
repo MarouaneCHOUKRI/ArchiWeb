@@ -62,15 +62,15 @@ export class AjouterCompteComponent implements OnInit {
       return;
     }
 
-    if (this.formulaire.controls['motdepasse'].invalid) {
-      alert("Le mot de passe est obligatoire et doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
-      return;
-    }
+    // if (this.formulaire.controls['motdepasse'].invalid) {
+    //   alert("Le mot de passe est obligatoire et doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
+    //   return;
+    // }
 
-    if (this.formulaire.controls['confirmermotdepasse'].invalid) {
-      alert("La confiramation du mot de passe est obligatoire et doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
-      return;
-    }
+    // if (this.formulaire.controls['confirmermotdepasse'].invalid) {
+    //   alert("La confiramation du mot de passe est obligatoire et doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
+    //   return;
+    // }
 
     if (this.formulaire.controls['role'].invalid) {
       alert("Le rôle de l'utilisateur doît être défini.");
@@ -84,7 +84,7 @@ export class AjouterCompteComponent implements OnInit {
         tap(response => {
             if (response.status === 'success') {
                 alert('Utilisateur ajouté avec succès.');
-                this.router.navigate(['/accueil']);
+                this.router.navigate(['/accueil-admin']);
             } else {
                 alert('Impossible d\'ajouter cet utilisateur.');
             }

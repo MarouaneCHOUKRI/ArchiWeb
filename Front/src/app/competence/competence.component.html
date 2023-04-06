@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Compétence</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <app-nav-bar-enseignant></app-nav-bar-enseignant>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="text-center mt-5 mb-4 pt-5">Créer une compétence</h2>
+        <form (ngSubmit)="CreateCompetence()" [formGroup]="Createformulaire" class="shadow p-3 mb-5 bg-body rounded">
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom de la compétence :</label>
+            <input type="text" id="nom" name="nom" formControlName="nom" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description :</label>
+            <textarea id="description" name="description" formControlName="description" class="form-control"></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Créer</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-center mt-5 mb-4 pt-5">Supprimer une compétence</h2>
+        <form (ngSubmit)="deleteCompetence()" [formGroup]="deleteFormulaire" class="shadow p-3 mb-5 bg-body rounded">
+          <div class="mb-3">
+            <label for="selectCompetences" class="form-label">Sélectionner une compétence :</label>
+            <select id="selectCompetences" name="selectCompetences" formControlName="selectCompetences" class="form-control">
+              <option value="" disabled selected hidden>Sélectionner une compétence</option>
+              <option *ngFor="let competence of competences" [value]="competence.nom">{{ competence.nom }}</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

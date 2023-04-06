@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-accueil-admin',
-  templateUrl: './accueil-admin.component.html',
-  styleUrls: ['./accueil-admin.component.css']
+  selector: 'app-accueil-enseignant',
+  templateUrl: './accueil-enseignant.component.html',
+  styleUrls: ['./accueil-enseignant.component.css']
 })
-export class AccueilAdminComponent {
+export class AccueilEnseignantComponent {
   nom: string | null;
   prenom: string | null;
 

@@ -31,7 +31,7 @@
           <td class="text-center">
             <a routerLink="/supprimer" [queryParams]="{email: user.email}" class="btn btn-danger btn-sm custom-btn"><i class="fas fa-trash"></i> Supprimer l'utilisateur</a>
             <br><br>
-            <a routerLink="/modifier-users" class="btn btn-primary btn-sm custom-btn"><i class="fas fa-edit"></i> Modifier ses informations</a>
+            <a routerLink="/modifier-users2" [queryParams]="{id: user.id, prenom: user.prenom, nom: user.nom, email: user.email, role: user.role}"class="btn btn-primary btn-sm custom-btn"><i class="fas fa-edit"></i> Modifier ses informations</a>
             <br><br>
           </td>
         </tr>

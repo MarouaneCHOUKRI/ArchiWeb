@@ -2,7 +2,7 @@ const db = require("../models");
 const bcrypt = require('bcrypt');
 const Utilisateur = db.ArchiWeb.Utilisateur;
 
-//Ajouter un utilisateur - Soit étudiant ou enseignant
+// Ajouter un utilisateur - Soit étudiant ou enseignant
 exports.createUser = (req, res) => {
     const utilisateur = new Utilisateur({
         nom: req.body.nom,
@@ -14,31 +14,44 @@ exports.createUser = (req, res) => {
 
     utilisateur
         .save()
-        .then(data => {
+        .then(() => {
             res.send({ status: 'success' });
         })
-        .catch(err => {
+        .catch(() => {
             res.send({ status: 'error' });
         });
 };
 
-//Supprimer un utilisateur
+// Supprimer un utilisateur
 exports.deleteUser = (req, res) => {
-    Utilisateur.findOneAndRemove({ email: req.body.email })
-        .then(data => {
-            if (!data) {
+    const email = req.body.email;
+    Utilisateur.findOne({ email: email })
+        .then(user => {
+            if (!user) {
                 res.status(404).send({
-                    message: `Impossible de supprimer l'utilisateur avec l'email ${req.body.email}. L'utilisateur n'a pas été trouvé.`
+                    message: `Impossible de supprimer l'utilisateur avec l'email ${email}. L'utilisateur n'a pas été trouvé.`
+                });
+            } else if (user.role === "administrateur") {
+                res.status(403).send({
+                    message: "Impossible de supprimer l'utilisateur 'admin' !"
                 });
             } else {
-                res.send({
-                    message: "L'utilisateur a été supprimé avec succès !"
-                });
+                Utilisateur.findOneAndRemove({ email: email })
+                    .then(data => {
+                        res.send({
+                            message: "L'utilisateur a été supprimé avec succès !"
+                        });
+                    })
+                    .catch(err => {
+                        res.status(500).send({
+                            message: "Une erreur s'est produite lors de la suppression de l'utilisateur avec l'email " + email
+                        });
+                    });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Impossible de supprimer l'utilisateur avec l'email " + req.body.email
+                message: "Une erreur s'est produite lors de la recherche de l'utilisateur avec l'email " + email
             });
         });
 };
@@ -55,12 +68,12 @@ exports.connectUser = (req, res) => {
                 return;
             }
 
-            res.send({ status: 'success', message: { _id: user._id, nom: user.nom, prenom: user.prenom, email: user.email } });
+            res.send({ status: 'success', message: { _id: user._id, nom: user.nom, prenom: user.prenom, email: user.email, role: user.role } });
             return;
         })
 }
 
-//Obtenir tous les utilisateurs - enseignant | étudiant 
+// Obtenir tous les utilisateurs - enseignant | étudiant 
 exports.getAllUsers = (req, res) => {
     Utilisateur.find({ role: { $in: ['étudiant', 'enseignant'] } })
         .then(users => {
@@ -77,7 +90,6 @@ exports.getAllUsers = (req, res) => {
 // Modifier les informations d'un utilisateur
 exports.updateUser = (req, res) => {
     const userId = req.body._id;
-
     Utilisateur.findById(userId)
         .then(user => {
             if (!user) {

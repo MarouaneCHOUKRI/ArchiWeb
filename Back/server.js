@@ -2,6 +2,7 @@ const express = require("express");
 const session = require('express-session');
 const cors = require("cors");
 const userController = require('./app/controllers/utilisateur.controller');
+const enseignantController = require('./app/controllers/enseignant.controller');
 const db = require("./app/models");
 const app = express();
 const path = require('path');
@@ -12,12 +13,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../Front/src/')));
 
-//Routes
+//Routes - userController
 app.post('/Create', userController.createUser);
 app.post('/Delete', userController.deleteUser);
 app.post('/Login', userController.connectUser);
 app.post('/Modifie', userController.updateUser);
 app.get('/Users', userController.getAllUsers);
+
+//Routes - enseignantController
+app.post('/Create-Projet', enseignantController.createProjet);
+app.post('/Create-Competence', enseignantController.createCompetence);
+app.post('/Delete-Competence', enseignantController.deleteCompetence);
+app.get('/Competences', enseignantController.getAllCompetences);
 
 // Connexion à la base de données
 db.mongoose

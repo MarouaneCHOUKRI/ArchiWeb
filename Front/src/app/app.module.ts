@@ -13,6 +13,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModifierInfoAdminComponent } from './modifier-info-admin/modifier-info-admin.component';
 import { ModifierInfoUsersComponent } from './modifier-info-users/modifier-info-users.component';
 import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
+import { ModifierInfoUsers2Component } from './modifier-info-users2/modifier-info-users2.component';
+import { AccueilEnseignantComponent } from './accueil-enseignant/accueil-enseignant.component';
+import { NavBarEnseignantComponent } from './nav-bar-enseignant/nav-bar-enseignant.component';
+import { AccueilEtudiantComponent } from './accueil-etudiant/accueil-etudiant.component';
+import { NavBarEtudiantComponent } from './nav-bar-etudiant/nav-bar-etudiant.component';
+import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.component';
+import { CompetenceComponent } from './competence/competence.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +30,14 @@ import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
     AccueilUtilisateurComponent,
     ModifierInfoAdminComponent,
     ModifierInfoUsersComponent,
-    AccueilAdminComponent
+    AccueilAdminComponent,
+    ModifierInfoUsers2Component,
+    AccueilEnseignantComponent,
+    NavBarEnseignantComponent,
+    AccueilEtudiantComponent,
+    NavBarEtudiantComponent,
+    AjouterProjetComponent,
+    CompetenceComponent
   ],
   imports: [
     BrowserModule,
