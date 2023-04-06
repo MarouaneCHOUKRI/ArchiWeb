@@ -2,7 +2,7 @@ const db = require("../models");
 const bcrypt = require('bcrypt');
 const Utilisateur = db.ArchiWeb.Utilisateur;
 
-//Ajouter un utilisateur
+//Ajouter un utilisateur - Soit étudiant ou enseignant
 exports.createUser = (req, res) => {
     const utilisateur = new Utilisateur({
         nom: req.body.nom,
@@ -24,7 +24,6 @@ exports.createUser = (req, res) => {
 
 //Supprimer un utilisateur
 exports.deleteUser = (req, res) => {
-
     Utilisateur.findOneAndRemove({ email: req.body.email })
         .then(data => {
             if (!data) {

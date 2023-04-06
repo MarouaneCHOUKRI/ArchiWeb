@@ -28,7 +28,7 @@ export class ModifierInfoAdminComponent {
       nom: [this.nom , [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       prenom: [this.prenom, [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       email: [this.email, [Validators.required, Validators.email]],
-      motdepasse: [this.motdepasse, [Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])')]]
+      motdepasse: [this.motdepasse, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]]
     });    
   }
 
@@ -49,7 +49,6 @@ export class ModifierInfoAdminComponent {
       return;
     }
     
-    console.log(this.formulaire.controls['motdepasse'].value)
     if (this.formulaire.controls['motdepasse'].invalid) {
       alert("Le mot de passe doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
       return;
@@ -61,12 +60,13 @@ export class ModifierInfoAdminComponent {
 
     this.http.post("http://localhost:8081/Modifie", data)
       .subscribe(response => {
+        alert('Modification Réussie.');
         this.router.navigate(['/accueil']);
         localStorage.setItem('nom', data.nom);
         localStorage.setItem('prenom', data.prenom);
         localStorage.setItem('email', data.email);
       }, error => {
-        alert('Error:' + error);
+        alert('Erreur lors de la modification.');
       });
   }
 }

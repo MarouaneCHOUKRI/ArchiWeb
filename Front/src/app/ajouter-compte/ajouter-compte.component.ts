@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-ajouter-compte',
@@ -11,24 +12,30 @@ import { HttpClient } from '@angular/common/http';
 export class AjouterCompteComponent implements OnInit {
   formulaire!: FormGroup;
 
-  nom = '';
-  prenom = '';
-  email = '';
-  motdepasse = '';
-  confirmermotdepasse = '';
-  role = '';
+  nom: string | null;
+  prenom: string | null;
+  email: string | null;
+  motdepasse: string | null;
+  confirmermotdepasse: string | null;
+  role: string | null;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+    this.nom = '';
+    this.prenom = '';
+    this.email = '';
+    this.motdepasse = '';
+    this.confirmermotdepasse = '';
+    this.role = '';
+   }
 
   ngOnInit(): void {
     this.formulaire = this.fb.group({
-      nom: ['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
-      prenom: ['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
+      nom: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      prenom: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       email: ['', [Validators.required, Validators.email]],
-      motdepasse: ['', Validators.required, Validators.minLength(8), Validators.pattern('^[a-zA-Z0-9!@#\$%\^&\*]+$')
-    ],
-      confirmermotdepasse: ['', Validators.required],
-      role: ['', Validators.required]
+      motdepasse: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$')]],
+      confirmermotdepasse: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$')]],
+      role: ['', [Validators.required]]
     });
   }
 
@@ -49,8 +56,19 @@ export class AjouterCompteComponent implements OnInit {
       return;
     }
     
+
+    if (this.formulaire.value.motdepasse !== this.formulaire.value.confirmermotdepasse) {
+      alert("Les deux mots de passe doivent être identiques");
+      return;
+    }
+
     if (this.formulaire.controls['motdepasse'].invalid) {
-      alert("Le mot de passe doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
+      alert("Le mot de passe est obligatoire et doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
+      return;
+    }
+
+    if (this.formulaire.controls['confirmermotdepasse'].invalid) {
+      alert("La confiramation du mot de passe est obligatoire et doit contenir au moins 8 caractères, y compris une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
       return;
     }
 
@@ -59,19 +77,24 @@ export class AjouterCompteComponent implements OnInit {
       return;
     }
 
-    if (this.formulaire.value.motdepasse !== this.formulaire.value.confirmermotdepasse) {
-      alert("Les deux mots de passe doivent être identiques");
-      return;
-    }
-
     const data = this.formulaire.value;
 
-    this.http.post("http://localhost:8081/Create", data)
-      .subscribe(response => {
-        alert('Response:' + response);
-        this.router.navigate(['/accueil']);
-      }, error => {
-        alert('Error:' + error);
-      });
+    this.http.post<{ status: string; message: string; }>("http://localhost:8081/Create", data)
+    .pipe(
+        tap(response => {
+            if (response.status === 'success') {
+                alert('Utilisateur ajouté avec succès.');
+                this.router.navigate(['/accueil']);
+            } else {
+                alert('Impossible d\'ajouter cet utilisateur.');
+            }
+        }),
+        catchError(error => {
+            console.error(error);
+            alert('Erreur lors de la connexion');
+            throw error;
+        })
+    ).subscribe();
+
   }
 }
