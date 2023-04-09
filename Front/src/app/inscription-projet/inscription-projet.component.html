@@ -1,0 +1,39 @@
+<app-nav-bar-etudiant></app-nav-bar-etudiant>
+
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription projet</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center mt-5 mb-4 pt-5" >Projets disponibles</h1>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6" *ngFor="let p of projet">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ p.nom }}</h5>
+            <p class="card-text"> Description : {{ p.description }}</p>
+            <p class="card-text"> Compétences : 
+              <span *ngFor="let c of p.competences">
+                {{ c.nom }}
+              </span>
+            </p>
+            <p class="card-text"> Enseignant : {{ p.competences.nom }} {{ p.enseignant.prenom }} {{ p.enseignant.nom }}</p>
+            <button class="btn btn-primary" (click)="inscrireProjet(p)">S'inscrire</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

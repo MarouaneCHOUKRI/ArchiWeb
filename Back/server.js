@@ -3,6 +3,7 @@ const session = require('express-session');
 const cors = require("cors");
 const userController = require('./app/controllers/utilisateur.controller');
 const enseignantController = require('./app/controllers/enseignant.controller');
+const etudiantController = require('./app/controllers/etudiant.controller');
 const db = require("./app/models");
 const app = express();
 const path = require('path');
@@ -26,6 +27,11 @@ app.post('/Create-Competence', enseignantController.createCompetence);
 app.post('/Delete-Competence', enseignantController.deleteCompetence);
 app.get('/Competences', enseignantController.getAllCompetences);
 app.get('/Competences-Enseignant/:enseignantId', enseignantController.getCompetencesEnseignant);
+app.get('/Consulter/:enseignantId', enseignantController.getResultatsByEnseignant)
+
+//Routes - etudiantController
+app.get('/Projet/:etudiantId', etudiantController.getProjets);
+app.post('/Inscription-projet', etudiantController.inscrireProjet);
 
 // Connexion à la base de données
 db.mongoose

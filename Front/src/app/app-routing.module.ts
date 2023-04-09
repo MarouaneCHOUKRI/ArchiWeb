@@ -11,6 +11,8 @@ import { AjouterCompteComponent } from './ajouter-compte/ajouter-compte.componen
 import { ModifierInfoComponent } from './modifier-info/modifier-info.component'
 import { ModifierInfoUsersComponent } from './modifier-info-users/modifier-info-users.component'
 import { ModifierInfoUsers2Component } from './modifier-info-users2/modifier-info-users2.component'
+import { InscriptionProjetComponent} from './inscription-projet/inscription-projet.component'
+import { ResultatEnseignantProjetComponent} from './resultat-enseignant-projet/resultat-enseignant-projet.component'
 import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.component'
 import { CompetenceComponent } from './competence/competence.component'
 import { MyGuardGuard } from './my-guard.guard';
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'accueil-enseignant', component: AccueilEnseignantComponent, canActivate: [MyGuardGuard] },
   { path: 'accueil-etudiant', component: AccueilEtudiantComponent, canActivate: [MyGuardGuard] },
   { path: 'ajouter-projet', component: AjouterProjetComponent, canActivate: [MyGuardGuard] },
+  { path: 'inscription-projet', component: InscriptionProjetComponent, canActivate: [MyGuardGuard] },
   { path: 'competence', component: CompetenceComponent, canActivate: [MyGuardGuard] },
+  { path: 'resultat-enseignant', component: ResultatEnseignantProjetComponent, canActivate: [MyGuardGuard] },
   { path: 'supprimer', component: SupprimerCompteComponent, canActivate: [MyGuardGuard]},
   { path: 'ajouter', component: AjouterCompteComponent, canActivate: [MyGuardGuard]},
   { path: 'modifier', component: ModifierInfoComponent, canActivate: [MyGuardGuard]},

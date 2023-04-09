@@ -20,6 +20,8 @@ import { AccueilEtudiantComponent } from './accueil-etudiant/accueil-etudiant.co
 import { NavBarEtudiantComponent } from './nav-bar-etudiant/nav-bar-etudiant.component';
 import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.component';
 import { CompetenceComponent } from './competence/competence.component';
+import { InscriptionProjetComponent } from './inscription-projet/inscription-projet.component';
+import { ResultatEnseignantProjetComponent } from './resultat-enseignant-projet/resultat-enseignant-projet.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { CompetenceComponent } from './competence/competence.component';
     AccueilEtudiantComponent,
     NavBarEtudiantComponent,
     AjouterProjetComponent,
-    CompetenceComponent
+    CompetenceComponent,
+    InscriptionProjetComponent,
+    ResultatEnseignantProjetComponent,
   ],
   imports: [
     BrowserModule,

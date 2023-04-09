@@ -1,8 +1,7 @@
 const db = require("../models");
 const Projet = db.ArchiWeb.Projet;
+const Competence = db.ArchiWeb.Competence;
 const Resultat = db.ArchiWeb.Resultat;
-const Competence = db.ArchiWeb.Competence
-
 
 // Créer un projet
 exports.createProjet = (req, res) => {
@@ -53,6 +52,7 @@ exports.getAllCompetences = (req, res) => {
 // Récupérer toutes les compétences créer par un enseignant
 exports.getCompetencesEnseignant = (req, res) => {
     const enseignantId = req.params.enseignantId;
+
     Competence.find({ enseignant: enseignantId })
         .then((competences) => {
             res.send(competences);
@@ -79,3 +79,26 @@ exports.deleteCompetence = (req, res) => {
             res.status(500).send({ message: err.message });
         });
 };
+
+// Consulter les résultats des étudiants
+exports.getResultatsByEnseignant = async (req, res) => {
+    try {
+        const enseignantId = req.params.enseignantId;
+        const projet = await Projet.findOne({ enseignant: enseignantId });
+        const resultats = await Resultat.find({ projet: projet._id }).populate('etudiant').populate('competence');
+        const resultatsAvecDetails = resultats.map(resultat => ({
+            etudiant: resultat.etudiant,
+            projet: projet.nom,
+            competence: resultat.competence,
+            niveauAcquisition: resultat.niveauAcquisition
+        }));
+        console.log(resultatsAvecDetails);
+        res.status(200).send(resultatsAvecDetails);
+    } catch (err) {
+        res.status(500).send({
+            message:
+                err.message || "Une erreur s'est produite lors de la récupération de la liste des étudiants."
+        });
+    }
+}
+

@@ -1,0 +1,24 @@
+<app-nav-bar-enseignant></app-nav-bar-enseignant>
+<div class="container mt-4">
+    <h3 class="text-center mt-5 mb-4 pt-5" >Résultats des étudiants de vos projets</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Étudiant</th>
+          <th>Projet</th>
+          <th>Compétences</th>
+          <th>Niveau d'acquisition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resultat of resultats">
+          <td>{{ resultat.etudiant.nom }} {{ resultat.etudiant.prenom }}</td>
+          <td>{{ resultat.projet}} </td>
+          <td>{{ resultat.competence.nom}} </td>
+          <td>{{ resultat.niveauAcquisition }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> 
+
+  
