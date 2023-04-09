@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModifierInfoAdminComponent } from './modifier-info-admin.component';
+import { ModifierInfoAdminComponent } from './modifier-info.component';
 
 describe('ModifierInfoAdminComponent', () => {
   let component: ModifierInfoAdminComponent;

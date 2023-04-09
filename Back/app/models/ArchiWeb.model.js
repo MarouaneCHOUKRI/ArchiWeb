@@ -16,8 +16,9 @@ module.exports = mongoose => {
     });
 
     const competenceSchema = new mongoose.Schema({
-        nom: { type: String, required: true },
+        nom: { type: String, required: true, unique: true},
         description: { type: String },
+        enseignant: { type: mongoose.Schema.Types.ObjectId, ref: 'Utilisateur' },
     });
 
     const resultatSchema = new mongoose.Schema({
@@ -26,6 +27,7 @@ module.exports = mongoose => {
         competence: { type: mongoose.Schema.Types.ObjectId, ref: 'Competence' },
         niveauAcquisition: { type: String, enum: ['non-acquise', 'en-cours', 'acquise'] },
     });
+
     //Ajouter les schémas au model 
     const Utilisateur = mongoose.model('Utilisateur', utilisateurSchema.method("toJSON", function () {
         const { __v, _id, ...object } = this.toObject();

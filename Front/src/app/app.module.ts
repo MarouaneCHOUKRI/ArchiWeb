@@ -10,7 +10,7 @@ import { AjouterCompteComponent } from './ajouter-compte/ajouter-compte.componen
 import { SupprimerCompteComponent } from './supprimer-compte/supprimer-compte.component';
 import { AccueilUtilisateurComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ModifierInfoAdminComponent } from './modifier-info-admin/modifier-info-admin.component';
+import { ModifierInfoComponent } from './modifier-info/modifier-info.component';
 import { ModifierInfoUsersComponent } from './modifier-info-users/modifier-info-users.component';
 import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
 import { ModifierInfoUsers2Component } from './modifier-info-users2/modifier-info-users2.component';
@@ -28,7 +28,7 @@ import { CompetenceComponent } from './competence/competence.component';
     AjouterCompteComponent,
     SupprimerCompteComponent,
     AccueilUtilisateurComponent,
-    ModifierInfoAdminComponent,
+    ModifierInfoComponent,
     ModifierInfoUsersComponent,
     AccueilAdminComponent,
     ModifierInfoUsers2Component,

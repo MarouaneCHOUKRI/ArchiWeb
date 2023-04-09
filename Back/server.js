@@ -25,6 +25,7 @@ app.post('/Create-Projet', enseignantController.createProjet);
 app.post('/Create-Competence', enseignantController.createCompetence);
 app.post('/Delete-Competence', enseignantController.deleteCompetence);
 app.get('/Competences', enseignantController.getAllCompetences);
+app.get('/Competences-Enseignant/:enseignantId', enseignantController.getCompetencesEnseignant);
 
 // Connexion à la base de données
 db.mongoose

@@ -32,7 +32,7 @@
             <label for="selectCompetences" class="form-label">Sélectionner une compétence :</label>
             <select id="selectCompetences" name="selectCompetences" formControlName="selectCompetences" class="form-control">
               <option value="" disabled selected hidden>Sélectionner une compétence</option>
-              <option *ngFor="let competence of competences" [value]="competence.nom">{{ competence.nom }}</option>
+              <option *ngFor="let competence of competences" [value]="competence.nom">{{ competence.nom }} - {{ competence.description }}</option>
             </select>
           </div>
           <div class="text-center">

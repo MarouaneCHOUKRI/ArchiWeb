@@ -27,6 +27,7 @@ exports.createCompetence = (req, res) => {
     const competence = new Competence({
         nom: req.body.nom,
         description: req.body.description,
+        enseignant: req.body.userId,
     });
 
     competence.save()
@@ -41,6 +42,18 @@ exports.createCompetence = (req, res) => {
 // Récupérer toutes les compétences
 exports.getAllCompetences = (req, res) => {
     Competence.find()
+        .then((competences) => {
+            res.send(competences);
+        })
+        .catch((err) => {
+            res.status(500).send({ message: err.message });
+        });
+};
+
+// Récupérer toutes les compétences créer par un enseignant
+exports.getCompetencesEnseignant = (req, res) => {
+    const enseignantId = req.params.enseignantId;
+    Competence.find({ enseignant: enseignantId })
         .then((competences) => {
             res.send(competences);
         })

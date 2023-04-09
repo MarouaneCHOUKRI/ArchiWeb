@@ -4,11 +4,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-modifier-info-admin',
-  templateUrl: './modifier-info-admin.component.html',
-  styleUrls: ['./modifier-info-admin.component.css']
+  selector: 'app-modifier-info',
+  templateUrl: './modifier-info.component.html',
+  styleUrls: ['./modifier-info.component.css']
 })
-export class ModifierInfoAdminComponent {
+export class ModifierInfoComponent {
   formulaire!: FormGroup; 
 
   nom: string | null;
@@ -61,7 +61,6 @@ export class ModifierInfoAdminComponent {
     this.http.post("http://localhost:8081/Modifie", data)
       .subscribe(response => {
         alert('Modification Réussie.');
-        this.router.navigate(['/accueil']);
         localStorage.setItem('nom', data.nom);
         localStorage.setItem('prenom', data.prenom);
         localStorage.setItem('email', data.email);

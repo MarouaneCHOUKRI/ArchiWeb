@@ -18,18 +18,20 @@ export class CompetenceComponent {
 
   ngOnInit(): void {
     
-    this.http.get<any[]>('http://localhost:8081/Competences').subscribe(data => {
+    this.http.get<any[]>('http://localhost:8081/Competences-Enseignant/' + localStorage.getItem('_id')).subscribe(data => {
       this.competences = data;
     });
 
     this.Createformulaire = this.fb.group({
       nom: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       description: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      userId: localStorage.getItem('_id'),
     });
 
     this.deleteFormulaire = this.fb.group({
       selectCompetences: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
     });
+    
   }
 
   CreateCompetence() {

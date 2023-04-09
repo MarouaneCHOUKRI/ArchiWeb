@@ -8,7 +8,7 @@ import { AccueilEnseignantComponent } from './accueil-enseignant/accueil-enseign
 import { AccueilEtudiantComponent } from './accueil-etudiant/accueil-etudiant.component'
 import { SupprimerCompteComponent } from './supprimer-compte/supprimer-compte.component'
 import { AjouterCompteComponent } from './ajouter-compte/ajouter-compte.component'
-import { ModifierInfoAdminComponent } from './modifier-info-admin/modifier-info-admin.component'
+import { ModifierInfoComponent } from './modifier-info/modifier-info.component'
 import { ModifierInfoUsersComponent } from './modifier-info-users/modifier-info-users.component'
 import { ModifierInfoUsers2Component } from './modifier-info-users2/modifier-info-users2.component'
 import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.component'
@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'competence', component: CompetenceComponent, canActivate: [MyGuardGuard] },
   { path: 'supprimer', component: SupprimerCompteComponent, canActivate: [MyGuardGuard]},
   { path: 'ajouter', component: AjouterCompteComponent, canActivate: [MyGuardGuard]},
-  { path: 'modifier-admin', component: ModifierInfoAdminComponent, canActivate: [MyGuardGuard]},
+  { path: 'modifier', component: ModifierInfoComponent, canActivate: [MyGuardGuard]},
   { path: 'modifier-users', component: ModifierInfoUsersComponent, canActivate: [MyGuardGuard]},
   { path: 'modifier-users2', component: ModifierInfoUsers2Component, canActivate: [MyGuardGuard]},
   { path: '**', component: LoginComponent}
