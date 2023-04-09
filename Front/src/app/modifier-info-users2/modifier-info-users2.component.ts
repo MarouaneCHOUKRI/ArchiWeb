@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ModifierInfoUsers2Component {
   formulaire!: FormGroup; 
 
+  id: string | null;
   nom: string | null;
   prenom: string | null;
   email: string | null;
@@ -19,6 +20,7 @@ export class ModifierInfoUsers2Component {
   role: string | null;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    this.id = '';
     this.nom = '';
     this.prenom = '';
     this.email = '';
@@ -29,7 +31,8 @@ export class ModifierInfoUsers2Component {
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
-      if(params['nom'] && params['prenom'] && params['email'] && params['role']){
+      if(params['id'] && params['nom'] && params['prenom'] && params['email'] && params['role']){
+        this.id = params['id']; 
         this.nom = params['nom'];
         this.prenom = params['prenom'];
         this.email = params['email'];
@@ -74,13 +77,19 @@ export class ModifierInfoUsers2Component {
     }
     
     const data = this.formulaire.value;
+    data._id = this.id;
+    this.formulaire.patchValue(data);
 
-    this.http.post("http://localhost:8081/Modifie", data)
+    console.log(data);
+
+    this.http.post("http://localhost:8081/Modifie" , data)
       .subscribe(response => {
         alert('Modification Réussie.');
-        this.router.navigate(['/accueil-admin']);
+        this.router.navigate(['/modifier-users']);
       }, error => {
-        alert('Erreur lors de la modification.');
+        console.log(error);
+        alert('Erreur lors de la modification : ' + error.error.message);
       });
+
   }
 }

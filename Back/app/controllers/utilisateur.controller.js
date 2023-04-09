@@ -106,6 +106,10 @@ exports.updateUser = (req, res) => {
                 user.motDePasse = bcrypt.hashSync(req.body.motdepasse, 10);
             }
 
+            if (req.body.role) {
+                user.role = req.body.role;
+            }
+
             user.save()
                 .then(data => {
                     res.send({ status: 'success' });

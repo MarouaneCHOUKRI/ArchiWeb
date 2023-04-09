@@ -15,12 +15,14 @@ export class ModifierInfoComponent {
   prenom: string | null;
   email: string | null;
   motdepasse: string | null;
+  role: string | null;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.nom = localStorage.getItem('nom');
     this.prenom = localStorage.getItem('prenom');
     this.email = localStorage.getItem('email');
     this.motdepasse = '';
+    this.role = localStorage.getItem('role');
   }
 
   ngOnInit(): void {
@@ -64,6 +66,19 @@ export class ModifierInfoComponent {
         localStorage.setItem('nom', data.nom);
         localStorage.setItem('prenom', data.prenom);
         localStorage.setItem('email', data.email);
+
+        if(this.role == "administrateur"){
+          this.router.navigate(['/accueil-admin']);
+        }
+
+        if(this.role == "enseignant"){
+          this.router.navigate(['/accueil-enseignant']);
+        }
+
+        if(this.role == "étudiant"){
+          this.router.navigate(['/accueil-etudiant']);
+        }
+
       }, error => {
         alert('Erreur lors de la modification.');
       });
