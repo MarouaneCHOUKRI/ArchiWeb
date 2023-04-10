@@ -24,8 +24,10 @@ module.exports = mongoose => {
     const resultatSchema = new mongoose.Schema({
         etudiant: { type: mongoose.Schema.Types.ObjectId, ref: 'Utilisateur', required: true, populate: true },
         projet: { type: mongoose.Schema.Types.ObjectId, ref: 'Projet', required: true, populate: true },
-        competence: { type: mongoose.Schema.Types.ObjectId, ref: 'Competence', required: true, populate: true },
-        niveauAcquisition: { type: String, enum: ['non-acquise', 'en-cours', 'acquise'], required: true },
+        competences: [{
+            competence: { type: mongoose.Schema.Types.ObjectId, ref: 'Competence', required: true, populate: true },
+            niveauAcquisition: { type: String, enum: ['non-acquise', 'en-cours', 'acquise'], required: true },
+        }]
     });
 
     // Ajouter les schémas au model

@@ -27,14 +27,16 @@ exports.getProjets = (req, res, next) => {
 exports.inscrireProjet = async (req, res, next) => {
     const etudiantId = req.body.etudiantId;
     const projetId = req.body.projetId;
-    const competenceId = req.body.competenceId;
+    const competences = req.body.competenceIds;
 
     try {
         const resultat = new Resultat({
             etudiant: etudiantId,
             projet: projetId,
-            competence: competenceId,
-            niveauAcquisition: 'non-acquise'
+            competences: competences.map(c => ({
+                competence: c._id,
+                niveauAcquisition: 'non-acquise'
+            }))
         });
         await resultat.save();
         res.status(200).json(resultat);

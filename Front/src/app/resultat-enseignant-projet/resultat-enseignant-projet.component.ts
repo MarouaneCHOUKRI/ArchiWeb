@@ -13,7 +13,6 @@ export class ResultatEnseignantProjetComponent {
 
   ngOnInit(): void {
     this.http.get<any[]>('http://localhost:8081/Consulter/' + localStorage.getItem('_id')).subscribe(data => {
-      console.log(data);
       this.resultats = data;
     });
   }

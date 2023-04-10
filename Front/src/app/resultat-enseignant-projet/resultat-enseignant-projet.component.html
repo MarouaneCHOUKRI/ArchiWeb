@@ -7,18 +7,20 @@
           <th>Étudiant</th>
           <th>Projet</th>
           <th>Compétences</th>
-          <th>Niveau d'acquisition</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let resultat of resultats">
           <td>{{ resultat.etudiant.nom }} {{ resultat.etudiant.prenom }}</td>
           <td>{{ resultat.projet}} </td>
-          <td>{{ resultat.competence.nom}} </td>
-          <td>{{ resultat.niveauAcquisition }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let competence of resultat.competences">
+                {{ competence.competence.nom }} - {{ competence.niveauAcquisition }}
+              </li>
+            </ul>
+          </td>
         </tr>
       </tbody>
     </table>
-  </div> 
-
-  
+  </div>

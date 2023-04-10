@@ -84,21 +84,21 @@ exports.deleteCompetence = (req, res) => {
 exports.getResultatsByEnseignant = async (req, res) => {
     try {
         const enseignantId = req.params.enseignantId;
-        const projet = await Projet.findOne({ enseignant: enseignantId });
-        const resultats = await Resultat.find({ projet: projet._id }).populate('etudiant').populate('competence');
+        const projets = await Projet.find({ enseignant: enseignantId });
+        const projetsIds = projets.map(projet => projet._id);
+        const resultats = await Resultat.find({ projet: { $in: projetsIds } })
+            .populate('etudiant')
+            .populate('competences.competence');
         const resultatsAvecDetails = resultats.map(resultat => ({
             etudiant: resultat.etudiant,
-            projet: projet.nom,
-            competence: resultat.competence,
-            niveauAcquisition: resultat.niveauAcquisition
+            projet: projets.find(projet => projet._id.equals(resultat.projet)).nom,
+            competences: resultat.competences
         }));
-        console.log(resultatsAvecDetails);
         res.status(200).send(resultatsAvecDetails);
     } catch (err) {
         res.status(500).send({
             message:
-                err.message || "Une erreur s'est produite lors de la récupération de la liste des étudiants."
+                err.message || "Une erreur s'est produite lors de la récupération de la liste des résultats."
         });
     }
 }
-

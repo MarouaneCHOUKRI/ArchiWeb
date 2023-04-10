@@ -24,10 +24,8 @@ export class InscriptionProjetComponent {
     const projetId = projet.id;
     const competenceIds = projet.competences;
 
-    competenceIds.forEach((competenceId: any) => {
-      this.http.post<any>('http://localhost:8081/Inscription-projet', { etudiantId, projetId, competenceId }).subscribe(resultat => {
+    this.http.post<any>('http://localhost:8081/Inscription-projet', { etudiantId, projetId, competenceIds }).subscribe(resultat => {
         this.router.navigate(['/accueil-etudiant']);
-      });
     });
   }
 
