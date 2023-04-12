@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./inscription-projet.component.css']
 })
 export class InscriptionProjetComponent {
-
   projet: any[] | undefined;
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -25,7 +24,8 @@ export class InscriptionProjetComponent {
     const competenceIds = projet.competences;
 
     this.http.post<any>('http://localhost:8081/Inscription-projet', { etudiantId, projetId, competenceIds }).subscribe(resultat => {
-        this.router.navigate(['/accueil-etudiant']);
+      alert('succès.')  
+      this.router.navigate(['/accueil-etudiant']);
     });
   }
 

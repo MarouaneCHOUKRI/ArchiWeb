@@ -5,7 +5,6 @@ const Projet = db.ArchiWeb.Projet;
 // Obtenire tout les projets ou l'étudiant n'est pas inscrit
 exports.getProjets = (req, res, next) => {
     const etudiantId = req.params.etudiantId;
-
     Resultat.find({ etudiant: etudiantId })
         .populate('projet', 'nom description enseignant')
         .then(resultats => {
@@ -45,7 +44,21 @@ exports.inscrireProjet = async (req, res, next) => {
     }
 };
 
+// Récupérer tous les résultats en fonction de l'ID étudiant
+exports.getResultatsByEtudiantId = (req, res, next) => {
+    const etudiantId = req.params.etudiantId;
 
+    Resultat.find({ etudiant: etudiantId })
+        .populate('projet', 'nom description enseignant')
+        .populate('etudiant', 'nom prenom email')
+        .then(resultats => {
+            console.log(resultats);
+            res.status(200).json(resultats);
+        })
+        .catch(error => {
+            next(error);
+        });
+};
 
 
 

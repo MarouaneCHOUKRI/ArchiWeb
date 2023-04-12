@@ -31,6 +31,7 @@ app.get('/Consulter/:enseignantId', enseignantController.getResultatsByEnseignan
 
 //Routes - etudiantController
 app.get('/Projet/:etudiantId', etudiantController.getProjets);
+app.get('/Resultat-etudiant/:etudiantId', etudiantController.getResultatsByEtudiantId);
 app.post('/Inscription-projet', etudiantController.inscrireProjet);
 
 // Connexion à la base de données

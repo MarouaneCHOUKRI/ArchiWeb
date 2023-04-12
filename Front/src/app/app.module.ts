@@ -22,6 +22,7 @@ import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.componen
 import { CompetenceComponent } from './competence/competence.component';
 import { InscriptionProjetComponent } from './inscription-projet/inscription-projet.component';
 import { ResultatEnseignantProjetComponent } from './resultat-enseignant-projet/resultat-enseignant-projet.component';
+import { EtudiantProjetComponent } from './etudiant-projet/etudiant-projet.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ResultatEnseignantProjetComponent } from './resultat-enseignant-projet/
     CompetenceComponent,
     InscriptionProjetComponent,
     ResultatEnseignantProjetComponent,
+    EtudiantProjetComponent,
   ],
   imports: [
     BrowserModule,

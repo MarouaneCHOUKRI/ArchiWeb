@@ -1,5 +1,4 @@
 module.exports = mongoose => {
-    // Définition des schémas
     const utilisateurSchema = new mongoose.Schema({
         nom: { type: String, required: true },
         prenom: { type: String, required: true },
@@ -30,7 +29,6 @@ module.exports = mongoose => {
         }]
     });
 
-    // Ajouter les schémas au model
     const Utilisateur = mongoose.model('Utilisateur', utilisateurSchema.method("toJSON", function () {
         const { __v, _id, ...object } = this.toObject();
         object.id = _id;

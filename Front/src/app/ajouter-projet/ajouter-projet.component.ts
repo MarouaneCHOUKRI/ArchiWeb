@@ -39,12 +39,12 @@ export class AjouterProjetComponent implements OnInit {
     this.http.post('http://localhost:8081/Create-Projet', projet)
     .pipe(
       tap(res => {
-        alert(res);
+        alert("Le projet a été créé avec succès !");
         this.router.navigate(['/accueil-enseignant']);
         }
       ),
       catchError(err => {
-        alert(err);
+        alert("dcdc");
         throw (err);
       })
     )

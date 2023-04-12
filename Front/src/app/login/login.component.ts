@@ -9,8 +9,6 @@ import { catchError, tap } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
-
   email: string = '';
   password: string = '';
 
@@ -63,7 +61,5 @@ export class LoginComponent {
       })
     )
     .subscribe();
-  }
-  
-
+  } 
 }
